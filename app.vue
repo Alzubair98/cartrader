@@ -18,7 +18,9 @@
           <h1 class="text-8xl font-serif mb-10 text-white">Find your drive</h1>
         </div>
       </div>
+      <div class="z-1 absolute w-full h-full bg-black opacity-50"></div>
     </div>
+
     <!-- Home Hero-->
   </div>
 </template>
