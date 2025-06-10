@@ -9,8 +9,10 @@
 </template>
 
 <script setup lang="ts">
+const { toTitleCase } = useUtilities();
+
 useHead({
-  title: `${useRoute().params.name}`,
+  title: toTitleCase(`${useRoute().params.name}`),
 });
 
 definePageMeta({

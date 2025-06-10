@@ -6,11 +6,12 @@
 </template>
 
 <script setup lang="ts">
+const { toTitleCase } = useUtilities();
 useHead({
   title:
-    `${useRoute().params.make ? useRoute().params.make : "Cars"}` +
+    `${useRoute().params.make ? toTitleCase(useRoute().params.make) : "Cars"}` +
     " in " +
-    useRoute().params.city,
+    toTitleCase(useRoute().params.city),
 });
 
 definePageMeta({
