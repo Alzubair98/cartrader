@@ -16,7 +16,6 @@
 
 <script setup lang="ts">
 const city = ref<string>("");
-const router = useRouter();
 
 const handleSearch = () => {
   if (city.value.trim() === "") {
@@ -24,6 +23,6 @@ const handleSearch = () => {
     return;
   }
   // Navigate to the city page with the entered city name
-  router.push(`/city/${city.value}/car`);
+  navigateTo(`/city/${city.value}/car`);
 };
 </script>
