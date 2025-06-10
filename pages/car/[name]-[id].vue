@@ -11,3 +11,9 @@
     <car-details-contact />
   </div>
 </template>
+
+<script setup lang="ts">
+useHead({
+  title: `${useRoute().params.name}`,
+});
+</script>

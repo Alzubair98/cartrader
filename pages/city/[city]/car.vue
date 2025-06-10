@@ -8,3 +8,12 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+useHead({
+  title:
+    `${useRoute().params.make ? useRoute().params.make : "Cars"}` +
+    " in " +
+    useRoute().params.city,
+});
+</script>
