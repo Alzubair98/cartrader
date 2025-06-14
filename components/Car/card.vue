@@ -1,9 +1,14 @@
 <template>
   <div
     class="shadow border w-full overflow-hidden mb-5 cursor-pointer h-[200px]"
+    @click="navigateTo(`/car/${car.name}-${car.id}`)"
   >
     <div class="flex h-full">
-      <img :src="car.url" alt="none" class="w-[300px] h-full" />
+      <img
+        :src="car.url"
+        alt="none"
+        class="lg:max-w-[250px] sm:max-w-[160px] md:max-w-[150px] h-full"
+      />
       <div class="p-4 flex flex-col">
         <div>
           <h1 class="text-2xl text-blue-700">{{ car.name }}</h1>
