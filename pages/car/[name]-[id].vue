@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+// define items
 const { toTitleCase } = useUtilities();
 const route = useRoute();
 const { cars } = useCars();
@@ -19,6 +20,14 @@ const { cars } = useCars();
 const car = computed(() => {
   return cars.find((c) => c.id === parseInt(route.params.id as string));
 });
+
+// if car is not found, throw an error
+if (!car.value) {
+  throw createError({
+    status: 404,
+    message: `Car with ID of ${route.params.id} Does Not Exist`,
+  });
+}
 
 useHead({
   title: toTitleCase(`${route.params.name}`),
