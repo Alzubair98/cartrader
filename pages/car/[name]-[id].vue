@@ -1,18 +1,27 @@
 <template>
-  <car-details-hero />
+  <div v-if="car">
+    <car-details-hero :car="car" />
 
-  <car-details-attributes />
+    <car-details-attributes :features="car.features" />
 
-  <car-details-description />
+    <car-details-description :desc="car.description" />
 
-  <car-details-contact />
+    <car-details-contact />
+  </div>
 </template>
 
 <script setup lang="ts">
 const { toTitleCase } = useUtilities();
+const route = useRoute();
+const { cars } = useCars();
+
+// find the car by id
+const car = computed(() => {
+  return cars.find((c) => c.id === parseInt(route.params.id as string));
+});
 
 useHead({
-  title: toTitleCase(`${useRoute().params.name}`),
+  title: toTitleCase(`${route.params.name}`),
 });
 
 definePageMeta({
