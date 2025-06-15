@@ -52,11 +52,18 @@ const updateModal = (type: ModalKey) => {
 
 const onChangeLocation = () => {
   if (city.value) {
-    updateModal("location");
-    navigateTo(`/city/${city.value}/car/${route.params.make}`, {
-      replace: true,
-    });
-    city.value = "";
+    if (isNaN(parseInt(city.value))) {
+      updateModal("location");
+      navigateTo(`/city/${city.value}/car/${route.params.make}`, {
+        replace: true,
+      });
+      city.value = "";
+    } else {
+      throw createError({
+        statusCode: 400,
+        message: "City name cannot be a number",
+      });
+    }
   } else {
     return;
   }
