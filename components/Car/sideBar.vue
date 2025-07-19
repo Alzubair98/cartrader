@@ -1,5 +1,6 @@
 <template>
   <div class="shadow border w-64 mr-10 z-30 h-[190px]">
+    <!-- Location Start -->
     <div class="p-5 flex justify-between relative cursor-pointer border-b">
       <h3>Location</h3>
       <h3 class="text-blue-400 capitalize" @click="updateModal('location')">
@@ -18,11 +19,29 @@
         </button>
       </div>
     </div>
+    <!-- Location end -->
 
+    <!-- Make end -->
     <div class="p-5 flex justify-between relative cursor-pointer border-b">
       <h3>Make</h3>
-      <h3 class="text-blue-400 capitalize">Toyto</h3>
+      <h3 class="text-blue-400 capitalize" @click="updateModal('make')">
+        {{ route.params.make || "any" }}
+      </h3>
+      <div
+        class="absolute borde shadow left-56 p-5 top-1 -m-1 w-[600px] flex justify-between flex-wrap bg-white"
+        v-if="modal.make"
+      >
+        <h4
+          v-for="make in makes"
+          :key="make"
+          class="w-1/3"
+          @click="onChangeMake(make)"
+        >
+          {{ make }}
+        </h4>
+      </div>
     </div>
+    <!-- Location end -->
 
     <div class="p-5 flex justify-between relative cursor-pointer">
       <h3>Price</h3>
@@ -33,6 +52,7 @@
 
 <script lang="ts" setup>
 const route = useRoute();
+const { makes } = useCars();
 
 const modal = ref({
   make: false,
@@ -67,5 +87,12 @@ const onChangeLocation = () => {
   } else {
     return;
   }
+};
+
+const onChangeMake = (make: string) => {
+  updateModal("make");
+  navigateTo(`/city/${route.params.city}/car/${make}`, {
+    replace: true,
+  });
 };
 </script>
