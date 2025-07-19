@@ -43,16 +43,55 @@
     </div>
     <!-- Location end -->
 
+    <!-- Price start -->
     <div class="p-5 flex justify-between relative cursor-pointer">
       <h3>Price</h3>
-      <h3 class="text-blue-400 capitalize"></h3>
+      <h3 class="text-blue-400 capitalize" @click="updateModal('price')">
+        {{ priceRangeText }}
+      </h3>
+
+      <div
+        class="absolute border shadow left-50 p-4 top-1 -m-1 bg-white"
+        v-if="modal.price"
+      >
+        <input
+          class="border p-1 rounded"
+          type="number"
+          placeholder="Min"
+          v-model="priceRange.min"
+        />
+
+        <input
+          class="border p-1 rounded"
+          type="number"
+          placeholder="Max"
+          v-model="priceRange.max"
+        />
+
+        <button
+          class="bg-blue-400 w-full mt-2 rounded text-white p-1"
+          @click="onChangePrice"
+        >
+          Apply
+        </button>
+      </div>
     </div>
+    <!-- Price end -->
   </div>
 </template>
 
 <script lang="ts" setup>
+// route & router
 const route = useRoute();
+const router = useRouter();
+
+// reacive variables
 const { makes } = useCars();
+const city = ref("");
+const priceRange = ref({
+  min: 0,
+  max: 0,
+});
 
 const modal = ref({
   make: false,
@@ -60,12 +99,24 @@ const modal = ref({
   price: false,
 });
 
-const city = ref("");
-
 // types
 type ModalKey = "make" | "location" | "price";
 
 // functions
+const priceRangeText = computed(() => {
+  const minPrice = route.query.minPrice;
+  const maxPrice = route.query.maxPrice;
+
+  if (!minPrice && !maxPrice) return "Any";
+  else if (!minPrice && maxPrice) {
+    return `< $${maxPrice}`;
+  } else if (minPrice && !maxPrice) {
+    return `> $${minPrice}`;
+  } else {
+    return ` $${minPrice} - $${maxPrice}`;
+  }
+});
+
 const updateModal = (type: ModalKey) => {
   modal.value[type] = !modal.value[type];
 };
@@ -93,6 +144,19 @@ const onChangeMake = (make: string) => {
   updateModal("make");
   navigateTo(`/city/${route.params.city}/car/${make}`, {
     replace: true,
+  });
+};
+
+const onChangePrice = () => {
+  updateModal("price");
+  if (priceRange.value.max && priceRange.value.min) {
+    if (priceRange.value.min > priceRange.value.max) return;
+  }
+  router.push({
+    query: {
+      minPrice: priceRange.value.min,
+      maxPrice: priceRange.value.max,
+    },
   });
 };
 </script>
