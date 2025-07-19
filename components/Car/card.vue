@@ -6,7 +6,7 @@
       class="absolute w-7 right-5 top-2 z-20"
       :src="favored ? heartFilled : heartOutline"
       alt=""
-      @click="favored = !favored"
+      @click="emit('favor', car.id)"
     />
     <div class="flex h-full" @click="navigateTo(`/car/${car.name}-${car.id}`)">
       <NuxtImg
@@ -28,9 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import heartFilled from "@/assets/heartFilled.png";
 import heartOutline from "@/assets/heartOutline.png";
+
 const props = defineProps<{
   car: {
     id: number;
@@ -42,9 +42,8 @@ const props = defineProps<{
     features: string[];
     description: string;
   };
+  favored: Boolean
 }>();
 
-const favored = useState(`favored-${props.car.id}`, () => {
-  return false;
-});
+const emit = defineEmits(['favor'])
 </script>
