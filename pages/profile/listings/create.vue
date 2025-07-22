@@ -26,6 +26,8 @@
         placeholder=""
         @change-input="onChangeInput"
       />
+
+      <CarAdImage />
     </div>
   </div>
 </template>
