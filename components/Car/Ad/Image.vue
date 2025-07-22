@@ -12,7 +12,9 @@
           />
           <span class="cursor-pointer">Browser File</span>
         </div>
-        <div class="border p-2 mt-3 w-56" v-if="image.preview"></div>
+        <div class="border p-2 mt-3 w-56" v-if="image.preview">
+          <img :src="image.preview" class="img-fluid" />
+        </div>
       </div>
     </form>
   </div>
