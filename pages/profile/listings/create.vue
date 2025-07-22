@@ -10,6 +10,22 @@
         name="make"
         @change-input="onChangeInput"
       />
+
+      <CarAdInput
+        v-for="input in inputs"
+        :key="input.id"
+        :title="input.title"
+        :name="input.name"
+        :placeholder="input.placeholder"
+        @change-input="onChangeInput"
+      />
+
+      <CarAdTextarea
+        name="description"
+        title="Description *"
+        placeholder=""
+        @change-input="onChangeInput"
+      />
     </div>
   </div>
 </template>
@@ -30,6 +46,7 @@ const info = useState("adInfo", () => {
     price: "",
     city: "",
     seats: "",
+    features: "",
     description: "",
     image: null,
   };
@@ -38,4 +55,43 @@ const info = useState("adInfo", () => {
 const onChangeInput = (data, name) => {
   info.value[name] = data;
 };
+
+const inputs = [
+  {
+    id: 1,
+    title: "Model *",
+    name: "model",
+    placeholder: "Ci",
+  },
+  {
+    id: 2,
+    title: "Year *",
+    name: "year",
+    placeholder: "2024",
+  },
+  {
+    id: 3,
+    title: "Miles *",
+    name: "miles",
+    placeholder: "10000",
+  },
+  {
+    id: 4,
+    title: "City *",
+    name: "city",
+    placeholder: "baghdad",
+  },
+  {
+    id: 5,
+    title: "Number of Seats *",
+    name: "seats",
+    placeholder: "5",
+  },
+  {
+    id: 6,
+    title: "Features *",
+    name: "features",
+    placeholder: "Leather Interior, no Accedent",
+  },
+];
 </script>
