@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
 
+  supabase: {
+    redirect: false,
+  },
+
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxt/content",
