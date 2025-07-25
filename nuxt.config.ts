@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/ui",
     "@nuxt/image-edge",
-    "@vueuse/nuxt"
+    "@vueuse/nuxt",
+    "@nuxtjs/supabase",
   ],
 });
