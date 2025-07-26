@@ -1,5 +1,8 @@
 <template>
-  <carCards :cars="cars" />
+  <carCards v-if="cars.length" :cars="cars" />
+  <div>
+    <h1 class="text-red-600 text-2xl">No Cars Found With Filters</h1>
+  </div>
 </template>
 
 <script setup>
