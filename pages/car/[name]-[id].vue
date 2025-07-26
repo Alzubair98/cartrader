@@ -14,20 +14,8 @@
 // define items
 const { toTitleCase } = useUtilities();
 const route = useRoute();
-const { cars } = useCars();
 
-// find the car by id
-const car = computed(() => {
-  return cars.find((c) => c.id === parseInt(route.params.id as string));
-});
-
-// if car is not found, throw an error
-if (!car.value) {
-  throw createError({
-    status: 404,
-    message: `Car with ID of ${route.params.id} Does Not Exist`,
-  });
-}
+const { data: car } = await useFetchCar(route.params.id);
 
 useHead({
   title: toTitleCase(`${route.params.name}`),
