@@ -1,6 +1,6 @@
 <template>
   <carCards v-if="cars.length" :cars="cars" />
-  <div>
+  <div v-else>
     <h1 class="text-red-600 text-2xl">No Cars Found With Filters</h1>
   </div>
 </template>
