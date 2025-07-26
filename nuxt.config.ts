@@ -7,6 +7,8 @@ export default defineNuxtConfig({
     redirect: false,
   },
 
+  css: ["~/assets/css/tailwind.css"],
+
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxt/content",
