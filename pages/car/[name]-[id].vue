@@ -16,6 +16,7 @@ const { toTitleCase } = useUtilities();
 const route = useRoute();
 
 const { data: car } = await useFetchCar(route.params.id);
+const user = useSupabaseUser();
 
 useHead({
   title: toTitleCase(`${route.params.name}`),
